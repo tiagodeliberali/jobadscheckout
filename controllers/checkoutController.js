@@ -4,11 +4,18 @@ var DbContext = require('../models/db')
 var co = require('co')
 var bodyParser = require('body-parser')
 
+
+/**
+ * Exposes checkout controller
+ *
+ * @param {Express} app 
+ */
 module.exports = function (app) {
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: false }))
 
   app.post('/api/checkout', function (req, res) {
+    // uses co to deal with async behaviour of db context calls
     co(function * () {
       var db = new DbContext()
       var priceList = yield db.getPriceList()
