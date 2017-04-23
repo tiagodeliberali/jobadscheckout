@@ -1,0 +1,22 @@
+{
+  "name": "checkoutads",
+  "version": "1.0.0",
+  "description": "Checkout adds full stack",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha test/**/*.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "standard": "^10.0.2",
+    "superagent": "^3.5.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "co": "^4.6.0",
+    "express": "^4.15.2"
+  }
+}
