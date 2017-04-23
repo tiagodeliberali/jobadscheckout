@@ -19,6 +19,8 @@ describe('Integration checkout controller', function () {
         assert.deepEqual(res.status, 200)
         assert.isTrue(res.ok)
         assert.deepEqual(res.body.total, 2559.92)
+        assert.deepEqual(res.body.customer, 'ford')
+        assert.deepEqual(res.body.items.length, 9)
 
         done()
       })

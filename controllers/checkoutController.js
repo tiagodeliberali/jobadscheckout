@@ -37,7 +37,11 @@ module.exports = function (app) {
         }
 
         res.setHeader('Content-Type', 'application/json')
-        res.send(JSON.stringify({ total: co.total() }))
+        res.send(JSON.stringify({
+          total: co.total(),
+          customer: req.body.customer,
+          items: req.body.items
+        }))
       },
 
       function (err) {
