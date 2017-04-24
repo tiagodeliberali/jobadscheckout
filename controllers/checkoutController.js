@@ -43,7 +43,6 @@ module.exports = function (app) {
           items: req.body.items
         }))
       },
-
       function (err) {
         console.error(err.stack)
       })
