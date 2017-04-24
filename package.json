@@ -4,7 +4,8 @@
   "description": "Checkout adds full stack",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test/**/*.js"
+    "test": "mocha test/**/*.js",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
