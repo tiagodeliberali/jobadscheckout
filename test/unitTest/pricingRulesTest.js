@@ -5,34 +5,13 @@ var demoData = require('../demoData/data')
 var assert = require('chai').assert
 
 describe('Pricing rules test', function () {
-  it('should get item default value', function () {
-    // Arrange
-    var pricingRules = new PricingRules(demoData.priceList)
-
-    // Act
-    var item = pricingRules.getItem('classic')
-
-    // Assert
-    assert.deepEqual(item.name, 'classic')
-    assert.deepEqual(item.value, 269.99)
-  })
-
-  it('should return undefined when item name not recognized', function () {
-    // Arrange
-    var pricingRules = new PricingRules(demoData.priceList)
-
-    var item = pricingRules.getItem('not_recognized_item')
-
-    assert.deepEqual(item, undefined)
-  })
-
   it('should not change the item list if no rule is registered', function () {
     // Arrange
-    var pricingRules = new PricingRules(demoData.priceList)
+    var pricingRules = new PricingRules()
 
     var items = [
-      pricingRules.getItem('standout'),
-      pricingRules.getItem('premium')
+      demoData.priceList['standout'],
+      demoData.priceList['premium']
     ]
 
     // Act
@@ -47,12 +26,12 @@ describe('Pricing rules test', function () {
 
   it('should consider rules set on item list processing', function () {
     // Arrange
-    var pricingRules = new PricingRules(demoData.priceList)
+    var pricingRules = new PricingRules()
 
     var items = [
-      pricingRules.getItem('classic'),
-      pricingRules.getItem('classic'),
-      pricingRules.getItem('classic')
+      demoData.priceList['classic'],
+      demoData.priceList['classic'],
+      demoData.priceList['classic']
     ]
 
     pricingRules.addRule(new BuyForRule('classic', { buy: 3, for: 2 }))

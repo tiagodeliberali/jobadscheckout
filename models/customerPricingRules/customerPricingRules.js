@@ -5,12 +5,11 @@ var BuyForRule = require('./buyForRule')
 var UpdatePriceRule = require('./updatePriceRule')
 
 /**
- * Creates a pricing rules instance based on the supplied PriceList and the customer pricing data.
+ * Creates a pricing rules instance based on the customer pricing data.
  *
- * @param {PriceList} priceList List of item prices to be passed to the generated PricingRules instance
  */
-function CustomerPricingRules (priceList) {
-  this.priceList = priceList
+function CustomerPricingRules () {
+
 }
 
 /**
@@ -20,7 +19,7 @@ function CustomerPricingRules (priceList) {
  * @returns The pricing rules instance.
  */
 CustomerPricingRules.prototype.get = function (customerPricingData) {
-  var pricingRules = new PricingRules(this.priceList)
+  var pricingRules = new PricingRules()
 
   if (customerPricingData !== undefined) {
     for (var i = 0; i < customerPricingData.length; i++) {

@@ -3,25 +3,11 @@
 /**
  *  Creates an instance of PricingRules.
  *
- *  This class is responsible for returning items based on a itemName and
- * applying a list of price rules over the items list
+ *  This class is responsible for applying a list of price rules over the items list
  *
- * @param {PriceList} priceList An object containing all itemNames and its items associated
  */
-function PricingRules (priceList) {
-  this.priceList = priceList
+function PricingRules () {
   this.rules = []
-}
-
-/**
- *  Returns the item with name and value based on the itemName.
- * Returns undefined if the itemName is not registered.
- *
- * @param {string} itemName The itemName of the item.
- * @returns The item with name and value
- */
-PricingRules.prototype.getItem = function (itemName) {
-  return this.priceList[itemName]
 }
 
 /**

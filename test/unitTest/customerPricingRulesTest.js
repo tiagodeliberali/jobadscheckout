@@ -6,20 +6,16 @@ var demoData = require('../demoData/data')
 var assert = require('chai').assert
 
 describe('Customer pricing rules test', function () {
-  it('should build a pricing rule with the default prices for an undefined customer', function () {
+  it('should build a pricing for an undefined customer', function () {
     // Arrange
-    var customerPricingRules = new CustomerPricingRules(demoData.priceList)
+    var customerPricingRules = new CustomerPricingRules()
 
     // Act
     var pricingRules = customerPricingRules.get(undefined)
-    var item = pricingRules.getItem('classic')
 
     // Assert
     var rules = pricingRules.getRules()
     assert.deepEqual(rules.length, 0)
-
-    assert.deepEqual(item.name, 'classic')
-    assert.deepEqual(item.value, 269.99)
   })
 
   it('should build a pricing rule considering specific rules when customer is found', function () {

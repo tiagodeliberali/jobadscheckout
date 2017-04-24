@@ -11,16 +11,13 @@ function Checkout (pricingRules) {
 }
 
 /**
- *   Adds an item to checkout item list. The itemName must be available in the
- * pricing rules item list.
+ *   Adds an item to checkout item list.
  *
- * @param {string} itemName The itemName of the item.
+ * @param {Item} item A item with name and value.
  */
-Checkout.prototype.add = function (itemName) {
-  var item = this.rules.getItem(itemName)
-
+Checkout.prototype.add = function (item) {
   if (item === undefined) {
-    throw new Error(`The supplied item name '${itemName}' was not found`)
+    throw new Error('Invalid item')
   }
 
   this.items.push(item)

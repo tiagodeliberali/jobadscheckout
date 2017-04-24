@@ -18,27 +18,27 @@ module.exports = function (app) {
     // uses co to deal with async behaviour of db context calls
     co(function * () {
       var db = new DbContext()
-      var priceList = yield db.getPriceList()
+
       var customerData = yield db.getCustomerPricingData(req.body.customer)
 
-      var customerPricingRules = new CustomerPricingRules(priceList)
+      var customerPricingRules = new CustomerPricingRules()
       var pricingRules = customerPricingRules.get(customerData)
+      var checkout = new Checkout(pricingRules)
 
-      return pricingRules
+      if (req.body.items !== undefined && req.body.items !== null) {
+        for (var i = 0; i < req.body.items.length; i++) {
+          var item = yield db.getPriceList(req.body.items[i])
+          checkout.add(item)
+        }
+      }
+
+      return checkout.total()
     })
     .then(
-      function (pricingRules) {
-        var co = new Checkout(pricingRules)
-
-        if (req.body.items !== undefined && req.body.items !== null) {
-          for (var i = 0; i < req.body.items.length; i++) {
-            co.add(req.body.items[i])
-          }
-        }
-
+      function (total) {
         res.setHeader('Content-Type', 'application/json')
         res.send(JSON.stringify({
-          total: co.total(),
+          total: total,
           customer: req.body.customer,
           items: req.body.items
         }))
