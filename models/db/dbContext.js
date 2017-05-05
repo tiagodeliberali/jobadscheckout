@@ -1,10 +1,10 @@
 'use strict'
 
-var demoData = require('../../test/demoData/data')
+var CustomerRule = require('./customerRuleModel')
+var ItemPrice = require('./itemPriceModel')
 
 /**
- * Fake implementation of a db context using promisses to simulate a real component.
- * This version will return data from the test demo data.
+ * Gets data from mongodb. In future, it must implement some cache to reduce database calls.
  *
  */
 function DbContext () {
@@ -19,7 +19,12 @@ function DbContext () {
  */
 DbContext.prototype.getPriceList = function (itemName) {
   return new Promise(function (resolve, reject) {
-    resolve(demoData.priceList[itemName])
+    ItemPrice.find({ name: itemName }, function (err, price) {
+      if (err) throw err
+
+      if (price.length > 0) resolve(price[0])
+      else resolve(undefined)
+    })
   })
 }
 
@@ -31,7 +36,11 @@ DbContext.prototype.getPriceList = function (itemName) {
  */
 DbContext.prototype.getCustomerPricingData = function (customerName) {
   return new Promise(function (resolve, reject) {
-    resolve(demoData.customerPricingData[customerName])
+    CustomerRule.find({ customer: customerName }, function (err, rules) {
+      if (err) throw err
+
+      resolve(rules)
+    })
   })
 }
 
